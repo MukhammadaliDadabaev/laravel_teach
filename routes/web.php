@@ -1,6 +1,8 @@
 <?php
 
-
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,47 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PageController::class, 'main']);
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/services', [PageController::class, 'services'])->name('services');
+Route::get('/projects', [PageController::class, 'projects'])->name('projects');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 
-//-------> 1-USUL
-Route::get('/test-route', function () {
-    return view('test');
-});
+Route::resource('posts', PostController::class);
 
-//-----> 2-USUL
-Route::view('/test-route', 'test');
-
-//-----> 3-USUL 
-Route::get('/test-route', function () {
-    return view('test');
-});
-// Bu bir-desa test-route-chiqadi
-Route::redirect('/bir', '/test-route');
-
-Route::get('/test-route/user', function () {
-    return 'USERS';
-});
-
-// BU Xoxlasa-qo'yadi parametr-olish
-Route::get('/user/{name?}', function ($name = null) {
-    return 'Siz kiritgan name: 👉 ' . $name;
-});
-
-// // BU parametr-olish
-Route::get('/user/{ghghjmch}', function ($user_id) {
-    return 'Siz kiritgan date 👉 ' . $user_id;
-});
-
-// BU ko'p parametr-olish
-Route::get('/user/{user_id}/image/{image_id}', function ($user_id, $image_id) {
-    return 'Siz kiritgan date 👉 ' . $user_id . '<br> Sizni rasm id: 👉' . $image_id;
-});
-
-// Bu URL-admin bilan boshlanadi
-Route::prefix('admin')->group(function () {
-    Route::get('/user', function () {
-        return "Siz kiritgan date 👉 /admin/users URL";
-    });
-});
+// Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+// Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+// Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+// Route::post('posts/create', [PostController::class, 'store'])->name('posts.store');
+// Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+// Route::put('posts/{post}/edit', [PostController::class, 'update'])->name('posts.update');
+// Route::delete('posts/{post}/delete', [PostController::class, 'delete'])->name('posts.delete');
