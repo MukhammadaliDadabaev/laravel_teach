@@ -13,44 +13,49 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     //----------> GET-> LIST-RO'YXATLARNI BARCHASINI
+    // public function index()
+    // {
+    //     //------------>  1-USUL post-qo'shish
+    //     // $newPost = new Post;
+    //     // $newPost->title = "Birinchi post 2";
+    //     // $newPost->short_content = "New yangi Birinchi post 2";
+    //     // $newPost->content = "Birinchi post ALI_1943 2";
+    //     // $newPost->photo = "/2/birinchi_post.jpg";
+    //     // $newPost->save();
+
+    //     //------------>  2-USUL post-qo'shish
+    //     // $posts = Post::create([
+    //     //     'title' => 'Rouston to Paris',
+    //     //     'short_content' => '3-short-content',
+    //     //     'content' => "3-content",
+    //     //     'photo' => "3_photo.phg"
+    //     // ]);
+
+    //     //--------> Yangilash 
+    //     // $post = Post::find(3)->update(['title' => 'Namangan va']);
+
+    //     //--------> 1-USUL O'CHIRISH
+    //     // $post = Post::where('id', 4)->first();
+    //     // $post->delete();
+
+    //     //--------> 2-USUL O'CHIRISH
+    //     // Post::destroy(4);
+
+    //     //-------> O'CHIRILGANNI-TIKLASH 
+    //     // Post::withTrashed()->find(4)->restore();
+
+    //     //--------> BARCHASINI-OLISH
+    //     // $posts = Post::all();
+    //     // dd($posts);
+
+    //     return "success";
+
+    //     return view('posts.index');
+    // }
     public function index()
     {
-        //------------>  1-USUL post-qo'shish
-        // $newPost = new Post;
-        // $newPost->title = "Birinchi post 2";
-        // $newPost->short_content = "New yangi Birinchi post 2";
-        // $newPost->content = "Birinchi post ALI_1943 2";
-        // $newPost->photo = "/2/birinchi_post.jpg";
-        // $newPost->save();
-
-        //------------>  2-USUL post-qo'shish
-        // $posts = Post::create([
-        //     'title' => 'Rouston to Paris',
-        //     'short_content' => '3-short-content',
-        //     'content' => "3-content",
-        //     'photo' => "3_photo.phg"
-        // ]);
-
-        //--------> Yangilash 
-        // $post = Post::find(3)->update(['title' => 'Namangan va']);
-
-        //--------> 1-USUL O'CHIRISH
-        // $post = Post::where('id', 4)->first();
-        // $post->delete();
-
-        //--------> 2-USUL O'CHIRISH
-        // Post::destroy(4);
-
-        //-------> O'CHIRILGANNI-TIKLASH 
-        // Post::withTrashed()->find(4)->restore();
-
-        //--------> BARCHASINI-OLISH
-        // $posts = Post::all();
-        // dd($posts);
-
-        return "success";
-
-        return view('posts.index');
+        $posts = Post::all();
+        return view('posts.index')->with('posts', $posts);
     }
 
     /**
@@ -83,9 +88,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     //--------------> GET-> POSTLARNI ID-ORQALI 1-tasini KO'RISH
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('posts.show')->with([
+            'post' => $post,
+            'recent_posts' => Post::latest()->get()->except($post->id)->take(5),
+        ]);
     }
 
     /**
