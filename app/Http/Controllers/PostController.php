@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -66,7 +67,7 @@ class PostController extends Controller
     //------------> GET-> POST-YARATISH SAHIFASI va FORMA
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -76,9 +77,16 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     //-------------> POST-> SO'ROV-YUBORISH FORMA-ORQALI
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
+        $post = Post::create([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            'photo' => $request->photo,
+        ]);
+
+        return redirect()->route('posts.index');
     }
 
     /**
