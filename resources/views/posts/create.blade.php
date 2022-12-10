@@ -20,7 +20,7 @@
           <div class="contact-form">
             <div id="success"></div>
 
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="control-group">
                 <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}" placeholder="Sarlavha" />
@@ -42,6 +42,9 @@
               </div>
               <div class="my-3">
                 <input type="file" name="photo" placeholder="Rasm" />
+                @error('photo')
+                <p class="help-block text-danger">{{ $message }}</p>
+                @enderror
               </div>
               <div>
                 <button class="btn btn-primary btn-block py-3 px-5" type="submit">Saqlash</button>

@@ -126,8 +126,8 @@
   <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
     <div class="row">
       <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-        <p class="m-0 text-white">&copy; <a href="#">Your Site Name</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
-        </p>
+        <strong>My Blog &copy; 2022 <a href="https://t.me/Mukhammad_Ali_1950">Telegram</a>.</strong>
+        Barcha huquqlar himoyalangan.
       </div>
       <div class="col-lg-6 text-center text-md-right">
         <ul class="nav d-inline-flex">

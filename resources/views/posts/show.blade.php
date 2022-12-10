@@ -27,7 +27,7 @@
           </div>
 
           <div class="mb-5">
-            <img class="img-fluid rounded w-100 mb-4" src="/img/carousel-1.jpg" alt="Image">
+            <img class="img-fluid rounded mb-4" src="{{ asset('storage/'.$post->photo) }}" style="width: 100%; height: 400px; object-fit: cover;" alt="Image">
             <p>{{ $post->content }}</p>
           </div>
 
@@ -116,7 +116,7 @@
             </ul>
           </div>
           <div class="mb-5">
-            <img src="/img/blog-1.jpg" alt="" class="img-fluid rounded">
+            <img src="{{ asset('storage/'.$post->photo) }}" alt="" class="img-fluid rounded">
           </div>
 
           <div class="mb-5">
@@ -124,7 +124,7 @@
             @foreach ($recent_posts as $recent_post )
 
             <div class="d-flex align-items-center border-bottom mb-3 pb-3">
-              <img class="img-fluid rounded" src="/img/blog-1.jpg" style="width: 80px; height: 80px; object-fit: cover;" alt="">
+              <img class="img-fluid rounded" src="{{ asset('storage/'.$post->photo) }}" style="width: 80px; height: 80px; object-fit: cover;" alt="">
               <div class="d-flex flex-column pl-3">
                 <a class="text-dark mb-2" href="">{{ $recent_post->title }}</a>
                 <div class="d-flex">
@@ -139,7 +139,7 @@
 
           </div>
           <div class="mb-5">
-            <img src="/img/blog-2.jpg" alt="" class="img-fluid rounded">
+            <img src="{{ asset('storage/'.$post->photo) }}" alt="" class="img-fluid rounded">
           </div>
           <div class="mb-5">
             <h3 class="mb-4 section-title">Tag Cloud</h3>

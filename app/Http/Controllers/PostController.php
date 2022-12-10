@@ -79,11 +79,20 @@ class PostController extends Controller
     //-------------> POST-> SO'ROV-YUBORISH FORMA-ORQALI
     public function store(StorePostRequest $request)
     {
-        $post = Post::create([
+        // //---------->  1-USUL fayl-ni nomsiz-saqlash
+        // $path = $request->file('photo')->store('post-photos');
+
+        //---------->  2-USUL fayl-ni uzini nomi-bilan saqlash
+        if ($request->hasFile('photo')) {
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('post-photos', $name);
+        }
+
+        Post::create([
             'title' => $request->title,
             'short_content' => $request->short_content,
             'content' => $request->content,
-            'photo' => $request->photo,
+            'photo' => $path ?? null,
         ]);
 
         return redirect()->route('posts.index');
