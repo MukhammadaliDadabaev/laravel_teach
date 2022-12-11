@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -120,9 +121,9 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     //-------------> GET-> POSTLARNI ID-ORQALI UPDATE-GA YUBORADI
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit')->with('post', $post);
     }
 
     /**
@@ -133,9 +134,27 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     //-------------> PUT-> POSTLARNI SO'ROV-YUBORIB ID-ORQALI YANGILAYDI
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request, Post $post)
     {
-        //
+        //---------->  2-USUL fayl-ni uzini nomi-bilan saqlash
+        if ($request->hasFile('photo')) {
+
+            if (isset($post->photo)) {
+                Storage::delete($post->photo);
+            }
+
+            $name = $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storeAs('post-photos', $name);
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'short_content' => $request->short_content,
+            'content' => $request->content,
+            'photo' => $path ?? $post->photo,
+        ]);
+
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
     /**
