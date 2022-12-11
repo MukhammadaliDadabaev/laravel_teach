@@ -17,8 +17,12 @@
         <div class="col-lg-8">
 
           <div class="text-right">
-            <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit', ['post' => $post->id]) }}">O'zgartirish</a>
-            <a class="btn btn-sm btn-outline-danger" href="">O'chirish</a>
+            <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST" onsubmit="return confirm('📍 ISHONCHINGIZ KOMILMI O\'CHIRISHGA 👀')">
+              @method('DELETE')
+              @csrf
+              <a class="btn btn-sm btn-outline-dark" href="{{ route('posts.edit', ['post' => $post->id]) }}">O'ZGARTIRISH</a>
+              <button type="submit" class="btn btn-sm btn-outline-danger">O'CHIRISH</button>
+            </form>
           </div>
 
           <div class="mb-5">
