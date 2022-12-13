@@ -11,8 +11,22 @@ class Post extends Model
     use HasFactory;
 
     // 1-Usul
-    protected $fillable = ['title', 'short_content', 'content', 'photo'];
+    protected $fillable = [
+        'title',
+        'short_content',
+        'content', 'photo'
+    ];
 
     // // 2-Usul
     // protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
