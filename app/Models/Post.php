@@ -12,9 +12,11 @@ class Post extends Model
 
     // 1-Usul
     protected $fillable = [
+        'user_id',
         'title',
         'short_content',
-        'content', 'photo'
+        'content',
+        'photo'
     ];
 
     // // 2-Usul
