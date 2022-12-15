@@ -23,32 +23,47 @@
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="control-group">
+                <label><b>Maqola nomi</b></label>
                 <input type="text" class="form-control p-4" name="title" value="{{ old('title') }}" placeholder="Sarlavha" />
                 @error('title')
                 <p class="help-block text-danger">{{ $message }}</p>
                 @enderror
               </div>
-              <div class="control-group my-3">
-                <textarea class="form-control p-4" rows="2" name="short_content" placeholder="Maqola mazmuni">{{ old('short_content') }}</textarea>
-                @error('short_content')
-                <p class="help-block text-danger">{{ $message }}</p>
+              <div class="form-group mt-3">
+                <label><b>Toifani tanlang</b></label>
+                <select name="category_id" class="form-control">
+                  @foreach($categories as $category)
+                  <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
+                </select>
+                @error('category_id')
+                <p class="text-danger">{{ $message }}</p>
                 @enderror
-              </div>
-              <div class="control-group">
-                <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqolalar">{{ old('content') }}</textarea>
-                @error('content')
-                <p class="help-block text-danger">{{ $message }}</p>
-                @enderror
-              </div>
-              <div class="my-3">
-                <input type="file" name="photo" placeholder="Rasm" />
-                @error('photo')
-                <p class="help-block text-danger">{{ $message }}</p>
-                @enderror
-              </div>
-              <div>
-                <button class="btn btn-primary btn-block py-3 px-5" type="submit">Saqlash</button>
-              </div>
+                <div class="control-group my-3">
+                  <label><b>Qisqacha mazmun</b></label>
+                  <textarea class="form-control p-4" rows="2" name="short_content" placeholder="Maqola mazmuni">{{ old('short_content') }}</textarea>
+                  @error('short_content')
+                  <p class="help-block text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
+                <div class="control-group">
+                  <label><b>Maqola yozish</b></label>
+                  <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqolalar">{{ old('content') }}</textarea>
+                  @error('content')
+                  <p class="help-block text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
+                <div class="control-group my-2">
+                  <label><b>Rasm tanlang</b></label>
+                  <br>
+                  <input type="file" name="photo" />
+                  @error('photo')
+                  <p class="help-block text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
+                <div>
+                  <button class="btn btn-primary btn-block mt-3 px-5" type="submit">Saqlash</button>
+                </div>
             </form>
           </div>
         </div>

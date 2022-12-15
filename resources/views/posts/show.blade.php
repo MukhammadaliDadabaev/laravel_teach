@@ -33,8 +33,12 @@
               <span class="text-primary px-2">|</span>
               <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $post->created_at }}</a>
             </div>
+            <div class="d-flex mb-2">
+              <a class="text-white text-uppercase py-1 px-2 bg-secondary rounded font-weight-medium">{{ $post->category->name }}</a>
+            </div>
             <h1 class="section-title mb-3">{{ $post->title }}</h1>
           </div>
+
 
           <div class="mb-5">
             <img class="img-fluid rounded mb-4" src="{{ asset('storage/'.$post->photo) }}" style="width: 100%; height: 400px; object-fit: cover;" alt="Image">
@@ -154,6 +158,9 @@
                   <small><a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a></small>
                   <small class="text-primary px-2">|</small>
                   <small><a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a></small>
+                </div>
+                <div class="d-flex mb-2">
+                  <a class="text-white px-2 bg-secondary rounded">{{ $post->category->name }}</a>
                 </div>
               </div>
             </div>
