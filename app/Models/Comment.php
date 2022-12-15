@@ -9,6 +9,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'body',
+        'post_id',
+        'user_id',
+    ];
+
     //-------> BU comment post-ga tegishli
     public function post()
     {
