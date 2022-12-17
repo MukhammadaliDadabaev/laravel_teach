@@ -27,9 +27,11 @@
 
           <div class="mb-5">
             <div class="d-flex mb-2">
-              <a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a>
+              @foreach ($post->tags as $tag)
+              <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $tag->name }}</a>
               <span class="text-primary px-2">|</span>
-              <a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a>
+              <a class="text-secondary text-uppercase font-weight-medium" href="">ID: {{ $tag->id }}</a>
+              @endforeach
               <span class="text-primary px-2">|</span>
               <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $post->created_at }}</a>
             </div>
@@ -44,11 +46,6 @@
             <img class="img-fluid rounded mb-4" src="{{ asset('storage/'.$post->photo) }}" style="width: 100%; height: 400px; object-fit: cover;" alt="Image">
             <p>{{ $post->content }}</p>
           </div>
-
-          <!-- <div class="text-right">
-            <a class="btn btn-sm btn-outline-dark" href="">O'zgartirish</a>
-            <a class="btn btn-sm btn-outline-danger" href="">O'chirish</a>
-          </div> -->
 
           <div class="mb-5">
             <h3 class="mb-4 section-title">{{ $post->comments()->count() }}. Izohlar</h3>
@@ -68,21 +65,6 @@
 
           <div class="bg-light rounded p-5">
             <h3 class="mb-4 section-title">Izoh qoldirish</h3>
-
-            <!-- <div class="form-row">
-                <div class="form-group col-sm-6">
-                  <label for="name">Name *</label>
-                  <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group col-sm-6">
-                  <label for="email">Email *</label>
-                  <input type="email" class="form-control" id="email">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="website">Website</label>
-                <input type="url" class="form-control" id="website">
-              </div> -->
 
             <form action="{{ route('comments.store') }}" method="POST">
               @csrf
@@ -117,34 +99,30 @@
               </div>
             </div>
           </div>
+          <!-- CATEGORIES -->
           <div class="mb-5">
             <h3 class="mb-4 section-title">Post Categories</h3>
             <ul class="list-inline m-0">
+              @foreach ($categories as $category)
               <li class="mb-1 py-2 px-3 bg-light d-flex justify-content-between align-items-center">
-                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>Web Design</a>
-                <span class="badge badge-primary badge-pill">150</span>
+                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>{{ $category->name }}</a>
+                <span class="badge badge-primary badge-pill">{{ $category->posts()->count() }}</span>
               </li>
-              <li class="mb-1 py-2 px-3 bg-light d-flex justify-content-between align-items-center">
-                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>Web Development</a>
-                <span class="badge badge-primary badge-pill">131</span>
-              </li>
-              <li class="mb-1 py-2 px-3 bg-light d-flex justify-content-between align-items-center">
-                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>Online Marketing</a>
-                <span class="badge badge-primary badge-pill">78</span>
-              </li>
-              <li class="mb-1 py-2 px-3 bg-light d-flex justify-content-between align-items-center">
-                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>Keyword Research</a>
-                <span class="badge badge-primary badge-pill">56</span>
-              </li>
-              <li class="py-2 px-3 bg-light d-flex justify-content-between align-items-center">
-                <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>Email Marketing</a>
-                <span class="badge badge-primary badge-pill">98</span>
-              </li>
+              @endforeach
             </ul>
           </div>
+          <!-- TAGS -->
           <div class="mb-5">
-            <img src="{{ asset('storage/'.$post->photo) }}" alt="" class="img-fluid rounded">
+            <h3 class="mb-4 section-title">Tag Cloud</h3>
+            <div class="d-flex flex-wrap m-n1">
+              @foreach ($tags as $tag)
+              <a href="" class="btn btn-outline-secondary m-1">{{ $tag->name }}</a>
+              @endforeach
+            </div>
           </div>
+          <!-- <div class="mb-5">
+            <img src="{{ asset('storage/'.$post->photo) }}" alt="" class="img-fluid rounded">
+          </div> -->
 
           <div class="mb-5">
             <h3 class="mb-4 section-title">Recent Post</h3>
@@ -155,9 +133,11 @@
               <div class="d-flex flex-column pl-3">
                 <a class="text-dark mb-2" href="">{{ $recent_post->title }}</a>
                 <div class="d-flex">
-                  <small><a class="text-secondary text-uppercase font-weight-medium" href="">Admin</a></small>
-                  <small class="text-primary px-2">|</small>
-                  <small><a class="text-secondary text-uppercase font-weight-medium" href="">Cleaning</a></small>
+                  @foreach ($post->tags as $tag)
+                  <a class="text-secondary text-uppercase font-weight-medium" href="">{{ $tag->name }}</a>
+                  <span class="text-primary px-2">|</span>
+                  <a class="text-secondary text-uppercase font-weight-medium" href="">ID: {{ $tag->id }}</a>
+                  @endforeach
                 </div>
                 <div class="d-flex mb-2">
                   <a class="text-white px-2 bg-secondary rounded">{{ $post->category->name }}</a>
@@ -171,17 +151,7 @@
           <div class="mb-5">
             <img src="{{ asset('storage/'.$post->photo) }}" alt="" class="img-fluid rounded">
           </div>
-          <div class="mb-5">
-            <h3 class="mb-4 section-title">Tag Cloud</h3>
-            <div class="d-flex flex-wrap m-n1">
-              <a href="" class="btn btn-outline-secondary m-1">Design</a>
-              <a href="" class="btn btn-outline-secondary m-1">Development</a>
-              <a href="" class="btn btn-outline-secondary m-1">Marketing</a>
-              <a href="" class="btn btn-outline-secondary m-1">SEO</a>
-              <a href="" class="btn btn-outline-secondary m-1">Writing</a>
-              <a href="" class="btn btn-outline-secondary m-1">Consulting</a>
-            </div>
-          </div>
+
           <div class="mb-5">
             <img src="/img/blog-3.jpg" alt="" class="img-fluid rounded">
           </div>

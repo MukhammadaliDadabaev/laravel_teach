@@ -29,6 +29,7 @@
                 <p class="help-block text-danger">{{ $message }}</p>
                 @enderror
               </div>
+
               <div class="form-group mt-3">
                 <label><b>Toifani tanlang</b></label>
                 <select name="category_id" class="form-control">
@@ -39,31 +40,42 @@
                 @error('category_id')
                 <p class="text-danger">{{ $message }}</p>
                 @enderror
-                <div class="control-group my-3">
-                  <label><b>Qisqacha mazmun</b></label>
-                  <textarea class="form-control p-4" rows="2" name="short_content" placeholder="Maqola mazmuni">{{ old('short_content') }}</textarea>
-                  @error('short_content')
-                  <p class="help-block text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                <div class="control-group">
-                  <label><b>Maqola yozish</b></label>
-                  <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqolalar">{{ old('content') }}</textarea>
-                  @error('content')
-                  <p class="help-block text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                <div class="control-group my-2">
-                  <label><b>Rasm tanlang</b></label>
-                  <br>
-                  <input type="file" name="photo" />
-                  @error('photo')
-                  <p class="help-block text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                <div>
-                  <button class="btn btn-primary btn-block mt-3 px-5" type="submit">Saqlash</button>
-                </div>
+              </div>
+
+              <div class="form-group mt-3">
+                <label><b>Tagni tanlang</b></label>
+                <select name="tags[]" class="form-control">
+                  @foreach($tags as $tag)
+                  <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                  @endforeach
+                </select>
+              </div>
+
+              <div class="control-group my-3">
+                <label><b>Qisqacha mazmun</b></label>
+                <textarea class="form-control p-4" rows="2" name="short_content" placeholder="Maqola mazmuni">{{ old('short_content') }}</textarea>
+                @error('short_content')
+                <p class="help-block text-danger">{{ $message }}</p>
+                @enderror
+              </div>
+              <div class="control-group">
+                <label><b>Maqola yozish</b></label>
+                <textarea class="form-control p-4" rows="6" name="content" placeholder="Maqolalar">{{ old('content') }}</textarea>
+                @error('content')
+                <p class="help-block text-danger">{{ $message }}</p>
+                @enderror
+              </div>
+              <div class="control-group my-2">
+                <label><b>Rasm tanlang</b></label>
+                <br>
+                <input type="file" name="photo" />
+                @error('photo')
+                <p class="help-block text-danger">{{ $message }}</p>
+                @enderror
+              </div>
+              <div>
+                <button class="btn btn-primary btn-block mt-3 px-5" type="submit">Saqlash</button>
+              </div>
             </form>
           </div>
         </div>
