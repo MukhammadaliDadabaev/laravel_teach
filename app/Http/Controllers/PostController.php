@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'index',
+            'show'
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -95,7 +102,7 @@ class PostController extends Controller
         }
 
         $post = Post::create([
-            'user_id' => 1,
+            'user_id' => auth()->id(),
             'category_id' => $request->category_id,
             'title' => $request->title,
             'short_content' => $request->short_content,

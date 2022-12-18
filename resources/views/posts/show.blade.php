@@ -16,6 +16,7 @@
       <div class="row">
         <div class="col-lg-8">
 
+          @auth
           <div class="text-right">
             <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST" onsubmit="return confirm('📍 ISHONCHINGIZ KOMILMI O\'CHIRISHGA 👀')">
               @method('DELETE')
@@ -24,6 +25,7 @@
               <button type="submit" class="btn btn-sm btn-outline-danger">O'CHIRISH</button>
             </form>
           </div>
+          @endauth
 
           <div class="mb-5">
             <div class="d-flex mb-2">
@@ -66,6 +68,7 @@
           <div class="bg-light rounded p-5">
             <h3 class="mb-4 section-title">Izoh qoldirish</h3>
 
+            @auth
             <form action="{{ route('comments.store') }}" method="POST">
               @csrf
               <div class="form-group">
@@ -77,6 +80,12 @@
                 <input type="submit" value="YUBORISH" class="btn btn-primary">
               </div>
             </form>
+            @else
+            <h5>
+              Izoh qoldirish uchun 👉
+              <a class="btn btn-sm btn-outline-primary" href="{{ route('login') }}">KIRING</a>
+            </h5>
+            @endauth
 
           </div>
         </div>
@@ -84,7 +93,7 @@
         <div class="col-lg-4 mt-5 mt-lg-0">
           <div class="d-flex flex-column text-center bg-secondary rounded mb-5 py-5 px-4">
             <img src="/img/user.jpg" class="img-fluid rounded-circle mx-auto mb-3" style="width: 100px;">
-            <h3 class="text-white mb-3">John Doe</h3>
+            <h3 class="text-white mb-3">{{ $post->user->name }}</h3>
             <p class="text-white m-0">Conset elitr erat vero dolor ipsum et diam, eos dolor lorem ipsum,
               ipsum
               ipsum sit no ut est. Guber ea ipsum erat kasd amet est elitr ea sit.</p>
@@ -106,7 +115,7 @@
               @foreach ($categories as $category)
               <li class="mb-1 py-2 px-3 bg-light d-flex justify-content-between align-items-center">
                 <a class="text-dark" href="#"><i class="fa fa-angle-right text-secondary mr-2"></i>{{ $category->name }}</a>
-                <span class="badge badge-primary badge-pill">{{ $category->posts()->count() }}</span>
+                <span class=" badge badge-primary badge-pill">{{ $category->posts()->count() }}</span>
               </li>
               @endforeach
             </ul>
