@@ -6,17 +6,17 @@ use App\Http\Requests\StorePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index',
-            'show'
-        ]);
+        $this->middleware('auth')->except(['index', 'show']);
+        //--> BU Resource-bo'lsa USER-NI CHECKLASH 
+        $this->authorizeResource(Post::class, 'post');
     }
     /**
      * Display a listing of the resource.
@@ -145,6 +145,15 @@ class PostController extends Controller
     //-------------> GET-> POSTLARNI ID-ORQALI UPDATE-GA YUBORADI
     public function edit(Post $post)
     {
+        //----------> 1-usul BU USER-NI CHECKLASH 
+        // if (!Gate::allows('update-post', $post)) {
+        //     abort(403);
+        // }
+
+        //----------> 2-usul BU USER-NI CHECKLASH 
+        // Gate::authorize('update-post', $post);
+        // Gate::authorize('update', $post);
+
         return view('posts.edit')->with('post', $post);
     }
 
@@ -158,6 +167,9 @@ class PostController extends Controller
     //-------------> PUT-> POSTLARNI SO'ROV-YUBORIB ID-ORQALI YANGILAYDI
     public function update(StorePostRequest $request, Post $post)
     {
+        //----------> BU USER-NI CHECKLASH 
+        // Gate::authorize('update', $post);
+
         //---------->  2-USUL fayl-ni uzini nomi-bilan saqlash
         if ($request->hasFile('photo')) {
 

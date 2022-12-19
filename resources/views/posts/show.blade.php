@@ -17,6 +17,8 @@
         <div class="col-lg-8">
 
           @auth
+          @canany(['update', 'delete'], $post)
+
           <div class="text-right">
             <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="POST" onsubmit="return confirm('📍 ISHONCHINGIZ KOMILMI O\'CHIRISHGA 👀')">
               @method('DELETE')
@@ -25,6 +27,8 @@
               <button type="submit" class="btn btn-sm btn-outline-danger">O'CHIRISH</button>
             </form>
           </div>
+
+          @endcanany
           @endauth
 
           <div class="mb-5">

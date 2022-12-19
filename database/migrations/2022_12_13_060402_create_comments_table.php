@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             //---------> 1-usul
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
 
             //---------> 2-usul
             // $table->unsignedBigInteger('post_id');
