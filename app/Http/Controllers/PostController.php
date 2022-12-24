@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
+use App\Jobs\ChangePost;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -15,9 +16,14 @@ class PostController extends Controller
 {
     public function __construct()
     {
+        //-------> BU USER-NI TEKSHIRIB-SAYTGA KIRGIZADI
         $this->middleware('auth')->except(['index', 'show']);
-        //--> BU Resource-bo'lsa USER-NI CHECKLASH 
+
+        //-------> BU Resource-bo'lsa USER-NI CHECKLASH 
         $this->authorizeResource(Post::class, 'post');
+
+        //-------> BU USER ISHLASHDAN OLDIN YANA PAROLNI-TEKSHIRADI 
+        // $this->middleware('password.confirm')->only('edit');
     }
     /**
      * Display a listing of the resource.
@@ -118,6 +124,9 @@ class PostController extends Controller
         }
         // POST EVENTNI TARQATISH
         PostCreated::dispatch($post);
+
+        // Queues-jobs FILE-LARNI SAQLASH
+        ChangePost::dispatch($post);
 
 
         return redirect()->route('posts.index');
