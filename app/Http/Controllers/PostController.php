@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Events\PostCreated;
 use App\Http\Requests\StorePostRequest;
 use App\Jobs\ChangePost;
+use App\Mail\PostCreated as MailPostCreated;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Mail;
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -126,8 +128,16 @@ class PostController extends Controller
         PostCreated::dispatch($post);
 
         // Queues-jobs FILE-LARNI SAQLASH
-        ChangePost::dispatch($post);
+        ChangePost::dispatch($post)->onQueue('emails');
 
+        // MAIL-HABAR YOUBORISH
+        // Mail::to($request->user())->send(new MailPostCreated($post));
+
+        // MAIL va QUEUE BILAN HABAR YOUBORISH
+        Mail::to($request->user())->queue((new MailPostCreated($post))->onQueue('emails'));
+
+        // MAIL va QUEUE BILAN HABAR YOUBORISHGA VAQT-BELGILASH
+        // Mail::to($request->user())->later(now()->addMilliseconds(70), (new MailPostCreated($post))->onQueue('emails'));
 
         return redirect()->route('posts.index');
     }
