@@ -9,7 +9,9 @@ use App\Mail\PostCreated as MailPostCreated;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Notifications\PostCreated as NotificationsPostCreated;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 // use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -138,6 +140,12 @@ class PostController extends Controller
 
         // MAIL va QUEUE BILAN HABAR YOUBORISHGA VAQT-BELGILASH
         // Mail::to($request->user())->later(now()->addMilliseconds(70), (new MailPostCreated($post))->onQueue('emails'));
+
+        // // 1-usul Notification xabar bildirish
+        // auth()->user()->notify(new NotificationsPostCreated($post));
+
+        // 2-usul Notification xabar bildirish
+        Notification::send(auth()->user(), new NotificationsPostCreated($post));
 
         return redirect()->route('posts.index');
     }

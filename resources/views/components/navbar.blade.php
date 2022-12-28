@@ -15,8 +15,20 @@
       <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
     </div>
     @auth
+    @if (!auth()->user()->unreadNotifications()->count() == 0)
+    <div class="">
+      <a href="{{ route('notifications.index') }}" class="btn position-relative" role="button">
+        <svg class="w-7 h-7 position-absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+        </svg>
+        <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger text-light">
+          {{ auth()->user()->unreadNotifications()->count() }}
+        </span>
+      </a>
+    </div>
+    @endif
     <a href="#"><b>{{ auth()->user()->name }}</b></a>&nbsp;&nbsp;
-    <a href="{{ route('posts.create') }}" class="btn btn-primary mr-3 d-none d-lg-block">POST QO'SHISH</a>
+    <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm mr-3 d-none d-lg-block">POST QO'SHISH</a>
     <form action="{{ route('logout') }}" method="POST">
       @csrf
       <button class="btn btn-light mr-3 d-none d-lg-block">CHIQISH</button>
