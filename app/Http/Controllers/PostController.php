@@ -12,8 +12,10 @@ use App\Models\Tag;
 use App\Notifications\PostCreated as NotificationsPostCreated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -77,6 +79,14 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(9);
+        // $posts = Post::latest()->get();
+        //---------> POST-LARNI CAECH-GA OLISH;DB::table('posts')->get();
+        // Cache::pull('posts');
+        // Cache::flush();
+        // $posts = Cache::remember('posts', 120, function () {
+        //     return Post::latest()->paginate(270);
+        // });
+
         return view('posts.index')->with('posts', $posts);
     }
 
