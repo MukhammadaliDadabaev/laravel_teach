@@ -30,12 +30,12 @@
   <!-- Header Start -->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-3 bg-secondary d-none d-lg-block">
+      <div class="col-lg-2 bg-secondary d-none d-lg-block">
         <a href="" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
           <h1 class="m-0 display-3 text-primary">Blog</h1>
         </a>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-10">
         <div class="row bg-dark d-none d-lg-flex">
           <div class="col-lg-7 text-left text-white">
             <div class="h-100 d-inline-flex align-items-center border-right border-primary py-2 px-3">
@@ -44,7 +44,7 @@
             </div>
             <div class="h-100 d-inline-flex align-items-center py-2 px-2">
               <i class="fa fa-phone-alt text-primary mr-2"></i>
-              <small>+000 777 888</small>
+              <small>+99891 000 00 00</small>
             </div>
           </div>
           <div class="col-lg-5 text-right">

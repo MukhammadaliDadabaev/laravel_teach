@@ -7,13 +7,18 @@
   </button>
   <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
     <div class="navbar-nav mr-auto py-0">
-      <a href="/" class="nav-item nav-link active">Home</a>
-      <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
-      <a href="{{ route('services') }}" class="nav-item nav-link">Service</a>
-      <a href="{{ route('projects') }}" class="nav-item nav-link">Project</a>
-      <a href="{{ route('posts.index') }}" class="nav-item nav-link">Blog</a>
-      <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+      <a href="/" class="nav-item nav-link active">{{__('Bosh sahifa')}}</a>
+      <a href="{{ route('about') }}" class="nav-item nav-link">{{__('Biz haqimizda')}}</a>
+      <a href="{{ route('services') }}" class="nav-item nav-link">{{__('Hizmatlar')}}</a>
+      <a href="{{ route('projects') }}" class="nav-item nav-link">{{__('Loyixalar')}}</a>
+      <a href="{{ route('posts.index') }}" class="nav-item nav-link">{{__('Blog')}}</a>
+      <a href="{{ route('contact') }}" class="nav-item nav-link">{{__('Aloqa')}}</a>
     </div>
+    <!-- lang -->
+    @foreach ($all_locales as $locale )
+    <a href="{{ route('change.locale', ['locale' => $locale]) }}" class="btn btn-info mr-1 d-none d-lg-block">{{ $locale }}</a>
+    @endforeach
+
     @auth
     @if (!auth()->user()->unreadNotifications()->count() == 0)
     <div class="">
