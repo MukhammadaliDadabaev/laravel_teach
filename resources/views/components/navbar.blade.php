@@ -30,13 +30,13 @@
           {{ auth()->user()->unreadNotifications()->count() }}
         </span>
       </a>
+      <a href="#"><b>{{ auth()->user()->name }}</b></a>&nbsp;&nbsp;
     </div>
     @endif
-    <a href="#"><b>{{ auth()->user()->name }}</b></a>&nbsp;&nbsp;
-    <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm mr-3 d-none d-lg-block">POST QO'SHISH</a>
+    <a href="{{ route('posts.create') }}" class="btn btn-primary btn-sm mr-1 d-none d-lg-block">POST QO'SHISH</a>
     <form action="{{ route('logout') }}" method="POST">
       @csrf
-      <button class="btn btn-light mr-3 d-none d-lg-block">CHIQISH</button>
+      <button class="btn btn-light mr-1 d-none d-lg-block">CHIQISH</button>
     </form>
     @else
     <a href="{{ route('login') }}" class="btn btn-primary mr-3 d-none d-lg-block">KIRISH</a>

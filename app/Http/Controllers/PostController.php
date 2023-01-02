@@ -157,7 +157,7 @@ class PostController extends Controller
         // 2-usul Notification xabar bildirish
         Notification::send(auth()->user(), new NotificationsPostCreated($post));
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post yozildi...');
     }
 
     /**

@@ -12,6 +12,11 @@
 
   <!-- Blog Start -->
   <div class="container-fluid py-5">
+    @if (session('success'))
+    <div class="alert alert-success" role="alert">
+      {{ session('success') }}
+    </div>
+    @endif
     <div class="container">
       <div class="row align-items-end mb-4">
         <div class="col-lg-6">
@@ -22,6 +27,7 @@
           <h4 class="font-weight-normal text-muted mb-3">Eirmod kasd duo eos et magna, diam dolore stet sea clita sit ea erat lorem. Ipsum eos ipsum magna lorem stet</h4>
         </div>
       </div>
+
       <div class="row">
 
         @foreach ($posts as $post)
