@@ -78,6 +78,19 @@ class PostController extends Controller
     // }
     public function index()
     {
+        // $posts = Post::all()->filter(function ($post) {
+        //     return $post->id > 3;
+        // });
+        //------------> Bu generator-func orqali ishlaydi 
+        // $posts = Post::cursor()->filter(function ($post) {
+        //     return $post->id > 3;
+        // });
+        // $id = '';
+        // foreach ($posts as $post) {
+        //     $id .= $post->id;
+        // }
+        // return $id;
+
         // $posts = Post::latest()->paginate(9);
         // $posts = Post::latest()->get();
         //---------> POST-LARNI CAECH-GA OLISH;DB::table('posts')->get();
