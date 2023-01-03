@@ -78,14 +78,14 @@ class PostController extends Controller
     // }
     public function index()
     {
-        $posts = Post::latest()->paginate(9);
+        // $posts = Post::latest()->paginate(9);
         // $posts = Post::latest()->get();
         //---------> POST-LARNI CAECH-GA OLISH;DB::table('posts')->get();
         // Cache::pull('posts');
         // Cache::flush();
-        // $posts = Cache::remember('posts', 120, function () {
-        //     return Post::latest()->paginate(270);
-        // });
+        $posts = Cache::remember('posts', 120, function () {
+            return Post::latest()->paginate(9);
+        });
 
         return view('posts.index')->with('posts', $posts);
     }

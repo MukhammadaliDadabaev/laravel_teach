@@ -24,6 +24,8 @@
 
   <!-- Customized Bootstrap Stylesheet -->
   <link href="/css/style.css" rel="stylesheet">
+  <!-- Vite -->
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
