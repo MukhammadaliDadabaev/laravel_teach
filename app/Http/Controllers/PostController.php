@@ -9,6 +9,7 @@ use App\Mail\PostCreated as MailPostCreated;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use App\Notifications\PostCreated as NotificationsPostCreated;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
@@ -78,6 +79,11 @@ class PostController extends Controller
     // }
     public function index()
     {
+        //---------> Name-xarfini katta-kichik
+        // $user = User::first();
+        // dd($user->name);
+
+
         // $posts = Post::all()->filter(function ($post) {
         //     return $post->id > 3;
         // });
