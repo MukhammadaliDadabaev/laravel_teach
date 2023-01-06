@@ -41,6 +41,6 @@ Route::get('language/{locale}', [LanguageController::class, 'change_locale'])->n
 Route::resources([
   'posts' => PostController::class,
   'comments' => CommentController::class,
-  'users' => UserController::class,
+  // 'users' => UserController::class,
   'notifications' => NotificationController::class,
 ]);
