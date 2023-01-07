@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
 class StorePostRequest extends FormRequest
 {
@@ -21,6 +23,11 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
+        //---> 1-usul TEKSHIRISH
+        // return Gate::authorize('create-post', Role::find(1));
+
+        //---> 2-usul TEKSHIRISH
+        // return Gate::authorize('create-post', Role::where('name', 'admin')->first());
         return true;
     }
 

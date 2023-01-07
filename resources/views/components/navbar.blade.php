@@ -20,7 +20,7 @@
     @endforeach
 
     @auth
-    @if (!auth()->user()->unreadNotifications()->count() == 0)
+    @if (auth()->user()->unreadNotifications()->count() == 0)
     <div class="">
       <a href="{{ route('notifications.index') }}" class="btn position-relative" role="button">
         <svg class="w-7 h-7 position-absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

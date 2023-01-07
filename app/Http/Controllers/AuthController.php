@@ -54,6 +54,9 @@ class AuthController extends Controller
 
         $user = User::create($validate);
 
+        //-----> USER-uchun DEFAULT-USER 
+        $user->roles()->attach(3);
+
         auth()->login($user);
 
         return redirect('/')->with('success', "Account successfully registered.");

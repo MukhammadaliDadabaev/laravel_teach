@@ -8,6 +8,7 @@ use App\Jobs\ChangePost;
 use App\Mail\PostCreated as MailPostCreated;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Role;
 use App\Models\Tag;
 use App\Models\User;
 use App\Notifications\PostCreated as NotificationsPostCreated;
@@ -117,6 +118,12 @@ class PostController extends Controller
     //------------> GET-> POST-YARATISH SAHIFASI va FORMA
     public function create()
     {
+        // //---> 1-usul TEKSHIRISH
+        // Gate::authorize('create-post');
+
+        //---> 2-usul TEKSHIRISH
+        // Gate::authorize('create-post', Role::find(1));
+
         return view('posts.create')->with([
             'categories' => Category::all(),
             'tags' => Tag::all(),
